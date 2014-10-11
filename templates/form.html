@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>CPSC Advising</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">CPSC<span class="logo_colour">Advising</span></a></h1>
+          <h2>UMW Computer Science Department</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li class="selected"><a href="index.html">Home</a></li>
+          <li><a href="http://cas.umw.edu/computerscience/requirements/">Majors</a></li>
+          <li><a href="http://cas.umw.edu/computerscience/course-offerings/">Courses Offered</a></li>
+          <li><a href="http://cas.umw.edu/computerscience/meet-the-faculty/">Department Members</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <!-- insert your sidebar items here -->
+        
+        <h3>Search</h3>
+        <form method="post" action="#" id="search_form">
+          <p>
+            <input class="search" type="text" name="search_field" value="Enter keywords....." />
+            <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
+          </p>
+        </form>
+</div>
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1>CPSC Student Advising Form</h1>
+
+	<form action="#" method="post">
+          <div class="form_settings">
+            <p><span>Enter Full Name: </span><input type="text" name="name" value="" /></p>
+	    <p><span>Enter Student ID: </span><input type="text" name="name" value="" /></p>
+	    <p><span>Enter Expected Graduation Year: </span><input type="text" name="name" value="" /></p>
+	    <p><span>Select Advisor: </span><select id="id" name="name"><option value="0"> </option><option value="1">Stephen Davies</option><option value="2">Jennifer Polack</option><option value="3">Ron Zacharski</option><option value="4">Karen Anewalt</option><option value="5">Ian Finlayson</option></select></p>
+	    <p><span>Select Completed Courses: </span><select multiple><option value="1">110</option><option value="2">125</option><option value="3">220</option><option value="4">230</option><option value="5">330</option><option value="6">370</option><option value="7">410</option><option value="8">326</option><option value="9">430</option><option value="10">405</option><option value="11">310</option><option value="12">305</option><option value="13">350</option><option value="14">401</option> </select></p>	
+	    <p><span>Select Courses For Upcoming Semester: </span><select multiple><option value="1">110</option><option value="2">125</option><option value="3">220</option><option value="4">230</option><option value="5">330</option><option value="6">370</option><option value="7">410</option><option value="8">326</option><option value="9">430</option><option value="10">405</option><option value="11">310</option><option value="12">305</option><option value="13">350</option><option value="14">401</option> </select></p> 
+            <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="name" value="Submit Form" /></p>
+          </div>
+        </form>
+        
+        <form name = 'checktable' action = '/process' method = "Post">
+	<fieldset>
+	{% for i in class_name %}
+	<tr><td>{{i.name.tagline}}</td><td><input type="checkbox" name="ischecked" value ={{i.name.tagline}} ></td></tr>
+	<br><br>
+	{% endfor %}
+	</fieldset>
+
+      </div>
+    </div>
+    <div id="footer">
+      Copyright &copy; textured_blue | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">Free CSS Templates</a>
+    </div>
+  </div>
+</body>
+</html>

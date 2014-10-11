@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- create the checkbutton lists -->
+<h1> Courses </h1>
+  <br>
+
+<form name = 'checktable' action = '/process' method = "Post">
+  <fieldset> 
+  {% for i in class_name %}
+   <tr><td>{{i.name.tagline}}</td><td><input type="checkbox" name="ischecked" value ={{i.name.tagline}} ></td></tr> 
+  <br><br>
+  {% endfor %}
+  </fieldset>
+
+
+<br>
+
+<input type="submit" value="Submit">
+</form>
+<tr><th>endpage</th></tr>
+
+{% endblock %}
