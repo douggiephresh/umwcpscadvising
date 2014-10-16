@@ -24,16 +24,36 @@ def mainIndex():
                  'name':{'tagline': 'bonjour world'}
               },
             ]
+    profs = [
+              {
+                 'name':{'tagline': 'davies'}
+              },
+      
+              {
+                 'name':{'tagline': 'anewalt'}
+              },
+      
+              {
+                 'name':{'tagline': 'polack'}
+              },
+           
+              {
+                 'name':{'tagline': 'Rachel'}
+              },
+            ]
     
-    
-    return render_template('index.html', class_name = names)
+    return render_template('index.html', class_name = names, class_name2= names, professors = profs)
 
-@app.route("/process", methods = ["GET", "POST"] )
+@app.route("/process", methods = ["POST","GET"] )
 def processForms():
-  checked = request.values.getlist('ischecked')
-  #return render_template('schedule.html', completed = checked.getlist('u'))  
-  return str(request.values.getlist('ischecked'))
+  
+  student = request.form['student']
+  studentid = request.form['studentid']
+  year = request.form['year']
+  
+  return (str(request.values.getlist('1checked'))+ str(request.values.getlist('2checked'))+ student + studentid + year)
   
 if __name__ == '__main__':
     app.debug=True
     app.run(host='0.0.0.0', port=3000)
+
