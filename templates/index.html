@@ -5,20 +5,44 @@
 <!-- create the checkbutton lists -->
 <h1> Courses </h1>
   <br>
+<form name = 'formlist' action = '/process' method = "Post">
+<div class="form_settings">
+            <p><span>Enter Full Name: </span><input type="text" name="student" /></p>
+	         
+            <p><span>Enter Student ID: </span><input type="text" name="studentid" /></p>
+	         
+            <p><span>Enter Expected Graduation Year: </span><input type="text" name="year"  /></p>
+	         
+            <p><span>Select Advisor: </span><select id="advisors" name="advisors">
+              {% for i in professors%}
+                 <option value = {{i.name.tagline}}> {{i.name.tagline}}</option>
+              {%endfor%}
+            </select></p>
+         
+            <p> Select Completed Courses: </p>
 
-<form name = 'checktable' action = '/process' method = "Post">
-  <fieldset> 
+<!--<form name = 'formlist' action = '/process' method = "Post"> -->
   {% for i in class_name %}
-   <tr><td>{{i.name.tagline}}</td><td><input type="checkbox" name="ischecked" value ={{i.name.tagline}} ></td></tr> 
+   <tr><td>{{i.name.tagline}}</td><td><input type="checkbox" name="1checked" value ={{i.name.tagline}} ></td></tr> 
   <br><br>
   {% endfor %}
-  </fieldset>
 
+ <p><span>Select Courses For Upcoming Semester: </span></p>
+  {% for i in class_name2 %}
+   <tr><td>{{i.name.tagline}}</td><td><input type="checkbox" name="2checked" value ={{i.name.tagline}} ></td></tr> 
+  <br><br>
+  {% endfor %}
 
 <br>
-
+<!-- <p style="padding-top: 15px"><span>&nbsp;</span>
+              
+            <input class="submit" type="submit" name="name" value="Submit Form" /></p> -->
 <input type="submit" value="Submit">
+  </div> 
 </form>
-<tr><th>endpage</th></tr>
+
 
 {% endblock %}
+
+
+

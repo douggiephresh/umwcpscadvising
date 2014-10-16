@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
+import MySQLdb, MySQLdb.cursors 
+'''import utils'''
 
 app = Flask(__name__)
 
@@ -7,6 +9,11 @@ app = Flask(__name__)
 @app.route('/', methods = ['GET','POST'])
 def mainIndex():
     #create query list to send to server to display 
+    '''db = utils.db_connect()
+    cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
+    query = 'SELECT advisor_first_name FROM advisor'
+    cur.execute(query)
+    profs = cur.fetchall()'''
     names = [
               {
                  'name':{'tagline': 'helloworld'}
