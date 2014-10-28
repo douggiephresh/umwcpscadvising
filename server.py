@@ -74,7 +74,7 @@ def adviseMain():
               },
             ]
     
-    return render_template('index.html', class_name = names, class_name2= names, professors = profs)
+  return render_template('index.html', class_name = names, class_name2= names, professors = profs)
 
 if __name__ == '__main__':
     app.debug=True
