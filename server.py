@@ -51,6 +51,83 @@ def mainIndex():
     
     return render_template('index.html', class_name = names, class_name2= names, professors = profs)
 
+@app.route("/login", methods = ["GET", "POST"])
+def index():
+  identify = request.form['identifier']
+  if request.method == "POST":
+    if identify == "admin":
+      return render_template("admin.html")
+    else:
+       names = [{'name':{'tagline': 'helloworld'}},{'name':{'tagline': 'holamundo'}},
+      
+              {
+                 'name':{'tagline': 'herroearf'}
+              },
+           
+              {
+                 'name':{'tagline': 'bonjour world'}
+              },
+            ]
+        
+    return render_template('index.html', class_name = names, class_name2= names, professors = [
+              {
+                 'name':{'tagline': 'davies'}
+              },
+      
+              {
+                 'name':{'tagline': 'anewalt'}
+              },
+      
+              {
+                 'name':{'tagline': 'polack'}
+              },
+           
+              {
+                 'name':{'tagline': 'new'}
+              },
+            ])
+  return render_template("index.html")
+
+@app.route('/advise', methods = ['GET','POST'])
+def adviseMain():
+    #create query list to send to server to display 
+    names = [
+              {
+                 'name':{'tagline': 'helloworld'}
+              },
+      
+              {
+                 'name':{'tagline': 'holamundo'}
+              },
+      
+              {
+                 'name':{'tagline': 'herroearf'}
+              },
+           
+              {
+                 'name':{'tagline': 'bonjour world'}
+              },
+            ]
+    profs = [
+              {
+                 'name':{'tagline': 'davies'}
+              },
+      
+              {
+                 'name':{'tagline': 'anewalt'}
+              },
+      
+              {
+                 'name':{'tagline': 'polack'}
+              },
+           
+              {
+                 'name':{'tagline': 'Rachel'}
+              },
+            ]
+    
+    return render_template('index.html', class_name = names, class_name2= names, professors = profs)
+
 @app.route("/process", methods = ["POST","GET"] )
 def processForms():
   
