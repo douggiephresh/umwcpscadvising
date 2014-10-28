@@ -15,7 +15,7 @@ def login():
     if identify == "admin":
 	return render_template("admin.html")
     else:
-	return redirect('index.html')
+	return redirect('/advise')
   return render_template("index.html")
 
 # process route. Action triggered by advise form submit
