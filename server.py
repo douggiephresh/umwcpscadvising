@@ -31,49 +31,49 @@ def processForms():
 # advise route. Renders dynamic form page using database. 
 @app.route('/advise', methods = ['GET','POST'])
 def adviseMain():
-    #create query list to send to server to display 
-    
-	db = utils.db_connect()
-	cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
-	query = 'SELECT * FROM advisor	'
-	cur.execute(query)
-	rows = cur.fetchall()
-# remove below once cur.fetchall() works	
-	names = [
-              {
-                 'name':{'tagline': 'helloworld'}
-              },
+  #create query list to send to server to display 
+  
+  db = utils.db_connect()
+  cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
+  query = 'SELECT * FROM advisor	'
+  cur.execute(query)
+  rows = cur.fetchall()
+  # remove below once cur.fetchall() works	
+  names = [
+        {
+           'name':{'tagline': 'helloworld'}
+        },
+  
+        {
+           'name':{'tagline': 'holamundo'}
+        },
+  
+        {
+           'name':{'tagline': 'herroearf'}
+        },
+     
+        {  
+           'name':{'tagline': 'bonjour world'}
+        },
+      ]
+  profs = [
+        {
+           'name':{'tagline': 'davies'}
+        },
+  
+        {
+           'name':{'tagline': 'anewalt'}
+        },
+  
+        {
+           'name':{'tagline': 'polack'}
+        },
+     
+        {
+           'name':{'tagline': 'Rachel'}
+        },
+      ]
       
-              {
-                 'name':{'tagline': 'holamundo'}
-              },
-      
-              {
-                 'name':{'tagline': 'herroearf'}
-              },
-           
-              {
-                 'name':{'tagline': 'bonjour world'}
-              },
-            ]
-	profs = [
-              {
-                 'name':{'tagline': 'davies'}
-              },
-      
-              {
-                 'name':{'tagline': 'anewalt'}
-              },
-      
-              {
-                 'name':{'tagline': 'polack'}
-              },
-           
-              {
-                 'name':{'tagline': 'Rachel'}
-              },
-            ]
-    
   return render_template('index.html', class_name = names, class_name2= names, professors = profs)
 
 if __name__ == '__main__':
