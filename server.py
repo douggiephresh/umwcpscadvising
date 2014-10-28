@@ -33,11 +33,11 @@ def processForms():
 def adviseMain():
   #create query list to send to server to display 
   
-  db = utils.db_connect()
+  '''db = utils.db_connect()
   cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
   query = 'SELECT * FROM advisor	'
   cur.execute(query)
-  rows = cur.fetchall()
+  rows = cur.fetchall()'''
   # remove below once cur.fetchall() works	
   names = [
         {
