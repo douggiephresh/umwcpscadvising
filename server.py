@@ -7,49 +7,9 @@ app = Flask(__name__)
 
 
 @app.route('/', methods = ['GET','POST'])
-def mainIndex():
-    #create query list to send to server to display 
-    db = utils.db_connect()
-    cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
-    query = 'SELECT advisor_first_name FROM advisor'
-    cur.execute(query)
-    profs = cur.fetchall()
-    names = [
-              {
-                 'name':{'tagline': 'helloworld'}
-              },
-      
-              {
-                 'name':{'tagline': 'holamundo'}
-              },
-      
-              {
-                 'name':{'tagline': 'herroearf'}
-              },
-           
-              {
-                 'name':{'tagline': 'bonjour world'}
-              },
-            ]
-    '''profs = [
-              {
-                 'name':{'tagline': 'davies'}
-              },
-      
-              {
-                 'name':{'tagline': 'anewalt'}
-              },
-      
-              {
-                 'name':{'tagline': 'polack'}
-              },
-           
-              {
-                 'name':{'tagline': 'Rachel'}
-              },
-            ]'''
-    
-    return render_template('index.html', class_name = names, class_name2= names, professors = profs)
+def login():
+  return render_template("login.html")
+
 
 @app.route("/login", methods = ["GET", "POST"])
 def index():
