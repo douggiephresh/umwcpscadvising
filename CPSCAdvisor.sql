@@ -1,8 +1,12 @@
 ﻿DROP DATABASE CPSCAdvisor;
 
+CREATE USER 'website'@'localhost' IDENTIFIED BY PASSWORD 'CPSCAdvisorsecret';
+
+
 CREATE DATABASE IF NOT EXISTS CPSCAdvisor;
 GRANT ALL PRIVILEGES ON CPSCAdvisor.* to 'website'@'localhost' identified by 'CPSCAdvisorWebPass123';
 USE CPSCAdvisor;
+
 
 
 CREATE TABLE IF NOT EXISTS advisor (
