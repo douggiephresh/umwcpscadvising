@@ -1,0 +1,92 @@
+This is how to use git! :)
+
+=====================
+==Always start with==
+=====================
+
+	git pull
+
+You always want to start everything by updating your repository.  Do not edit code without pulling first.
+
+
+=========================
+==To push your new code==
+=========================
+
+	git pull
+
+Yes pull again.  You need to be adding to the most up to date stuff.
+
+	git add <file name()s>
+
+	git commit -m "some message that explains you commit"
+
+	git push
+
+You need to pull again.  It is really important you  are merged to the correct head.
+
+=====================================
+==Check what files need to be added==
+=====================================
+
+	git status
+
+This will tell you if you need to add anything.  Ignore files that end or start with ~ .  They are just system files that are a back up. Do not add them.
+
+==========================
+==How get the respoitory==
+==========================
+
+	git clone
+
+This should only be used when you need a fresh version of the current repository.
+
+=============================================
+==How to set up ssh on a new machine (unix)==
+=============================================
+
+1. Go to your home directory.
+	
+	cd
+
+2. Go to the .ssh directory
+
+	cd .ssh
+
+3. See what is in that directory
+
+	ls -a
+
+4. If you do not have a "id_dsa.pub" file, you need to generate one.  Make sure to use the email associated with your GitHub account.
+
+	ssh-keygen -t rsa -C "your_email@example.com"
+
+5. Leave everything blank and keep hitting enter until it ends.
+
+6. Open id_rsa.pub file with a text editor.
+
+	cat ~/.ssh/id_rsa.pub
+
+	or
+
+	vim ~/.ssh/id_rsa.pub
+
+7. Copy the entire contents of that file to your clipboard.
+
+8. Go to the settings on your github account.
+
+	It looks like a gear.
+
+9. In the user settings sidebar, click SSH keys. 
+
+10. Add SSH key
+
+11. Give it a cool name
+
+	Cinnamon SSH
+
+12. Copy nad paste the contents of the id_rsa.pub file into the field.
+
+13. Click add.
+
+14. Now Clone the repsitory somewhere on the machine.
