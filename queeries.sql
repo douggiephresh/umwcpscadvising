@@ -35,3 +35,37 @@ INSERT INTO student_track (student_id, track_id) VALUES (SELECT student_id FROM 
 	--Advisor_Last
 	--Magic ID
 INSERT INTO student_advisor (student_id, advisor_id) VALUES (SELECT student_id FROM student WHERE magic_id = magic, SELECT advisor_id FROM advisors WHERE advisor_last_name = advisor_last);
+
+
+/************************************
+*****		Return Login		*****
+************************************/
+
+###
+# FROM Database
+###
+
+--none really...just a small text field
+
+###
+# TO Database
+###
+
+--select a student, we want their SQL primary key based upon their magic ID
+SELECT student_id FROM student WHERE magic = magic_id;
+
+
+/************************************
+*****		Update Courses		*****
+************************************/
+
+###
+# FROM Database
+###
+
+SELECT student_first_name FROM student WHERE id = student_id;
+
+
+###
+# TO Database
+###
