@@ -21,11 +21,13 @@ CREATE TABLE IF NOT EXISTS advisor (
 
 CREATE TABLE IF NOT EXISTS student (
 	student_id INT NOT NULL AUTO_INCREMENT,
+	magic_id INT NOT NULL,
 	student_user_name VARCHAR(25) NOT NULL,
 	student_last_name VARCHAR(25) NOT NULL,
 	student_first_name VARCHAR(25) NOT NULL,
 	student_email VARCHAR(25) NOT NULL,
-	student_year VARCHAR(25) NOT NULL,
+	student_year INT NOT NULL,
+	student_graduation_semester VARCHAR(25) NOT NULL,
 	PRIMARY KEY (student_id)
 );
 
