@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- create the checkbutton lists -->
+<h1> Courses </h1>
+  <br>
+<form name = 'formlist' action = '/process' method = "Post">
+<div class="form_settings">
+  
+            <p> Select Completed Courses: </p>
+
+<!--<form name = 'formlist' action = '/process' method = "Post"> -->
+   <table>
+  {% for i in class_name %}
+   <tr>
+     <td>{{i.name.tagline}}</td>
+     <td><input type="checkbox" name="checkcomplete" value ={{i.name.tagline}} ></td>
+   </tr> 
+  {% endfor %}
+  </table>
+  
+ <p><span>Select Courses For Upcoming Semester: </span></p>
+  <table>
+  {% for i in class_name2 %}
+   <tr>
+     <td>{{i.name.tagline}}</td>
+     <td><input type="checkbox" name="checkneed" value ={{i.name.tagline}} ></td>
+     <td><input type="checkbox" name="checkwant" value ={{i.name.tagline}} ></td>
+    </tr> 
+  {% endfor %}
+  </table>
+
+<br>
+<!-- <p style="padding-top: 15px"><span>&nbsp;</span>-->
+              
+        
+<input type="submit" value="Submit">
+  </div> 
+</form>
+
+
+{% endblock %}
+
+
+
