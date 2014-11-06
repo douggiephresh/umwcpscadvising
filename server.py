@@ -1,81 +1,129 @@
 from flask import Flask, render_template, request, redirect, url_for
-import utils
+import random
+
 app = Flask(__name__)
 
-#index route. renders the login page
+# first step, moves program to login.html
+
 @app.route('/', methods = ["GET", "POST"])
 def index():
   return render_template("login.html")
 
-# login route. renders admin or index based on user input
+# second step, renders login.html, allows access to first entry keyid and admin
+
 @app.route("/login", methods = ["GET", "POST"])
 def login():
-  identify = request.form['identifier']
-  if request.method == "POST":
-    if identify == "admin":
-	return render_template("admin.html")
-    else:
-	return redirect('/advise')
-  return render_template("index.html")
+    return render_template("index.html")
 
-# process route. Action triggered by advise form submit
-@app.route("/process", methods = ["POST","GET"] )
-def processForms():
+# second step two, allows login using key id  
   
-  student = request.form['student']
-  studentid = request.form['studentid']
-  year = request.form['year']
-  
-  return (str(request.values.getlist('1checked'))+ str(request.values.getlist('2checked'))+ student + studentid + year)
+@app.route('/keylogin', methods = ['GET', 'POST'])
+def keylogin():
+  return render_template("keylogin.html")
 
-# advise route. Renders dynamic form page using database. 
+# third step, takes information from first login and stores it into database. 
+# renders dynamic tables for user interaction
+
 @app.route('/advise', methods = ['GET','POST'])
 def adviseMain():
-  #create query list to send to server to display 
-  
-  '''db = utils.db_connect()
-  cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
-  query = 'SELECT * FROM advisor	'
-  cur.execute(query)
-  rows = cur.fetchall()'''
-  # remove below once cur.fetchall() works	
-  names = [
-        {
-           'name':{'tagline': 'helloworld'}
-        },
-  
-        {
-           'name':{'tagline': 'holamundo'}
-        },
-  
-        {
-           'name':{'tagline': 'herroearf'}
-        },
-     
-        {  
-           'name':{'tagline': 'bonjour world'}
-        },
-      ]
-  profs = [
-        {
-           'name':{'tagline': 'davies'}
-        },
-  
-        {
-           'name':{'tagline': 'anewalt'}
-        },
-  
-        {
-           'name':{'tagline': 'polack'}
-        },
-     
-        {
-           'name':{'tagline': 'Rachel'}
-        },
-      ]
+    # first form input values
+    firstname = request.form['firstname']
+    lastname = request.form['lastname']
+    year = request.form['year']
+    track = request.form['year']
+    advisor = request.form['advisor']
+    
+    ###################################
+    # Add above values to database    #
+    ###################################    
+    #QUERY
+    
+    ###################################
+    # Query Database For All Courses  #
+    # Query Database For All Courses  #
+    # Offered                         #
+    # look at render_tem for next step#
+    ################################### 
+    
+    
+    names = [
+              {
+                 'name':{'tagline': 'helloworld'}
+              },
       
-  return render_template('index.html', class_name = names, class_name2= names, professors = profs)
+              {
+                 'name':{'tagline': 'holamundo'}
+              },
+      
+              {
+                 'name':{'tagline': 'herroearf'}
+              },
+           
+              {
+                 'name':{'tagline': 'bonjour world'}
+              },
+            ]
+    profs = [
+              {
+                 'name':{'tagline': 'davies'}
+              },
+      
+              {
+                 'name':{'tagline': 'anewalt'}
+              },
+      
+              {
+                 'name':{'tagline': 'polack'}
+              },
+            ]
+    
+    # rename the 3 variables to whatever you choose
+    # we will need to modify jinja in index.html to grab desired data from queried lists 
+    return render_template('index.html', class_name = names, class_name2= names, professors = profs)
+
+
+# fourth step, processes course checkboxes, creates keyID, redirects to final page with key id
+  
+@app.route("/process", methods = ["POST","GET"] )
+def processForms():
+  # Three variables are lists of all checkboxes checked
+  checkcomplete = request.values.getlist('checkcomplete')
+  checkneed = request.values.getlist('checkneed')
+  checkwant = request.values.getlist('checkwant')
+  
+  ##############################
+  # We may need to format the  #
+  # lists above                #
+  ##############################
+  
+  
+  # debugging
+  for i in checkcomplete:
+    print(str(i))
+  for i in checkneed:
+     print(str(i))
+  for i in checkwant:
+    print(str(i))
+    
+  #############################
+  # need to query variables   
+  # into the database
+  # do it here  
+  #############################
+  #QUERY
+  
+  
+  #############################
+  # KeyID generation          #
+  # Query Student first, last #
+  #############################
+  rando = random.randrange(100,5000,1)
+  
+  return render_template("submit.html", keyID = rando)
+
 
 if __name__ == '__main__':
-    app.debug=True
-    app.run(host='0.0.0.0', port=55000)
+    ###################################################
+    app.debug=True # Remove this line before deliverable
+    ####################################################
+    app.run(host='0.0.0.0', port=3000)
