@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{%block content %}
+
+<h1>Login</h1>
+<div class = "form_settings">
+  <form action="/advise" method="post">
+    <table>
+      <tr>
+        <td> First Name </td>
+        <td><input type="text" name="firstname"></td>
+      </tr>
+      
+      <tr>
+        <td> Last Name</td>
+        <td><input type="text" name="lastname"></td>
+      </tr>
+       
+      <tr>
+        <td> Year(Freshman, Sophemore, Junior, Senior)</td>
+        <td><input type="text" name="year"></td>
+      </tr>
+       
+      <tr>
+        <td> Track(CIS,GIS,Traditional) </td>
+        <td><input type="text" name="track"></td>
+      </tr>
+       
+      <tr>
+        <td> Season(Fall,Spring,Summer) </td>
+        <td><input type="text" name="season"></td>
+      </tr>
+       
+      <tr>
+        <td> Advisor(Optional) </td>
+        <td><input type="text" name="advisor"></td>
+      </tr>
+      
+    </table>
+    <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="keysubmit" value="Enter"     /></p>
+    </form>
+
+    <form action = '/keylogin' method = 'get'>
+    <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="keysubmit" value="KeyId"     /></p>
+  </form>
+</div>
+
+
+
+{% endblock %}
