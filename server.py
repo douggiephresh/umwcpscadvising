@@ -126,4 +126,4 @@ if __name__ == '__main__':
     ###################################################
     app.debug=True # Remove this line before deliverable
     ####################################################
-    app.run(host='0.0.0.0', port=3000)
+    app.run(host='0.0.0.0', port=55000)
