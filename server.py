@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import random
+import random, utils
 
 app = Flask(__name__)
 
@@ -37,7 +37,7 @@ def adviseMain():
     # Add above values to database    #
     ###################################    
     #QUERY
-    
+    #INSERT INTO student (magic_id, student_last_name, student_first_name, student_email, student_year, student_graduation_semester) VALUES (magic, last, first, email, year, semester);
     ###################################
     # Query Database For All Courses  #
     # Query Database For All Courses  #
