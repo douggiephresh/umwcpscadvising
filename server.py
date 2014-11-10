@@ -88,8 +88,8 @@ def adviseMain():
 def processForms():
   # Three variables are lists of all checkboxes checked
   checkcomplete = request.values.getlist('checkcomplete')
-  checkneed = request.values.getlist('checkneed')
-  checkwant = request.values.getlist('checkwant')
+  checkneed = request.values.getlist('checkneed') # the getlist returns a list of all checked box values
+  checkwant = request.values.getlist('checkwant') # you may need to break down to each individual values
   
   ##############################
   # We may need to format the  #
