@@ -32,12 +32,18 @@ def adviseMain():
     year = request.form['year']
     track = request.form['year']
     advisor = request.form['advisor']
+    ### You don't get the gradation semester
+    ### year needs to be an int!
     
     ###################################
     # Add above values to database    #
     ###################################    
-    #QUERY
-    #INSERT INTO student (magic_id, student_last_name, student_first_name, student_email, student_year, student_graduation_semester) VALUES (magic, last, first, email, year, semester);
+    db = utils.db_connect()
+    cur = db.cursor()
+    query = 'INSERT INTO student (student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (\'' + lastname + '\',\'' + firstname + '\', \'' + year + '\');'
+    cur.execute(query)
+    db.commit()
+    #
     ###################################
     # Query Database For All Courses  #
     # Query Database For All Courses  #
