@@ -69,3 +69,8 @@ SELECT student_first_name FROM student WHERE id = student_id;
 ###
 # TO Database
 ###
+
+
+################################## OTHER ######################################
+
+INSERT INTO student (magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (100,'test1.a', 'test1.b', 2015, 'test1.c');
