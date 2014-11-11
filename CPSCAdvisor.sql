@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS student (
 	magic_id INT NOT NULL,
 	student_last_name VARCHAR(25) NOT NULL,
 	student_first_name VARCHAR(25) NOT NULL,
-	student_email VARCHAR(25) NOT NULL,
 	student_year INT NOT NULL,
 	student_graduation_semester VARCHAR(25) NOT NULL,
 	PRIMARY KEY (student_id)
@@ -84,7 +83,7 @@ INSERT INTO advisor (advisor_id, advisor_user_name, advisor_last_name, advisor_f
 INSERT INTO course (course_id, course_number, course_name, course_description) VALUES
 (1, 'cpsc430', 'Software Design', 'We play games to learn about team problem solving.');
 
-INSERT INTO student (student_id, student_user_name, student_last_name, student_first_name, student_email, student_year) VALUES
-(1, 'dradoye', 'radoye', 'douglas', 'test@test.com', 'Senior');
+INSERT INTO student (magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES
+(1, 'radoye', 'douglas',  2015, 'Spring');
 
 
