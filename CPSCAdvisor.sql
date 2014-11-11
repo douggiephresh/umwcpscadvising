@@ -1,10 +1,10 @@
-﻿DROP DATABASE CPSCAdvisor;
+DROP DATABASE CPSCAdvisor;
 
 CREATE USER 'website'@'localhost' IDENTIFIED BY PASSWORD 'CPSCAdvisorsecret';
 
 
 CREATE DATABASE IF NOT EXISTS CPSCAdvisor;
-GRANT ALL PRIVILEGES ON CPSCAdvisor.* to 'website'@'localhost' identified by 'CPSCAdvisorWebPass123';
+GRANT ALL PRIVILEGES ON CPSCAdvisor.* to 'CPSCadvising'@'localhost' identified by 'S1mpleS1mple';
 USE CPSCAdvisor;
 
 
@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS advisor (
 CREATE TABLE IF NOT EXISTS student (
 	student_id INT NOT NULL AUTO_INCREMENT,
 	magic_id INT NOT NULL,
-	student_user_name VARCHAR(25) NOT NULL,
 	student_last_name VARCHAR(25) NOT NULL,
 	student_first_name VARCHAR(25) NOT NULL,
 	student_email VARCHAR(25) NOT NULL,

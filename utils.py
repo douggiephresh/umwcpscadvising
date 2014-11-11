@@ -2,8 +2,8 @@
 import MySQLdb
 
 DATABASE='CPSCAdvisor'
-DB_USER = 'website'
-DB_PASSWORD = 'CPSCAdvisorsecret'
+DB_USER = 'CPSCadvising'
+DB_PASSWORD = 'S1mpleS1mple'
 HOST = 'localhost'
 
 def db_connect():
