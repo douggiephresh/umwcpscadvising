@@ -38,11 +38,11 @@ def adviseMain():
     ###################################
     # Add above values to database    #
     ###################################    
-    db = utils.db_connect()
-    cur = db.cursor()
-    query = 'INSERT INTO student (student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (\'' + lastname + '\',\'' + firstname + '\', \'' + year + '\');'
-    cur.execute(query)
-    db.commit()
+    #db = utils.db_connect()
+    #cur = db.cursor()
+    #query = 'INSERT INTO student (student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (\'' + lastname + '\',\'' + firstname + '\', \'' + year + '\');'
+    #cur.execute(query)
+    #db.commit()
     #
     ###################################
     # Query Database For All Courses  #
