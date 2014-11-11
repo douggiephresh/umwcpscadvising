@@ -27,11 +27,23 @@ def keylogin():
 @app.route('/advise', methods = ['GET','POST'])
 def adviseMain():
     # first form input values
-    firstname = request.form['firstname']
-    lastname = request.form['lastname']
-    year = request.form['year']
-    track = request.form['year']
-    advisor = request.form['advisor']
+    studentinfo = {
+    'firstname' : request.form['firstname'],
+    'lastname' : request.form['lastname'],
+    'year' : request.form['year'],
+    'track' : request.form['year'],
+    'advisor' : request.form['advisor']
+    }
+    season = ''
+    if 'fall' in request.form:
+      season = {'season':'fall'}
+    if 'spring' in request.form:
+      season = {'season':'spring'}
+    if 'summer' in request.form:
+      season = {'season':'summer'}
+    studentinfo.update(season)
+    
+    print(studentinfo)
     ### You don't get the gradation semester
     ### year needs to be an int!
     
@@ -123,7 +135,7 @@ def processForms():
   # KeyID generation          #
   # Query Student first, last #
   #############################
-  rando = random.randrange(100,5000,1)
+  rando = random.randrange(100,9000,1)
   
   return render_template("submit.html", keyID = rando)
 
