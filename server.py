@@ -42,6 +42,8 @@ def adviseMain():
     if 'summer' in request.form:
       season = {'season':'summer'}
     studentinfo.update(season)
+
+    magic = random.randrange(100,9000,1)
     
     print(studentinfo)
     ### You don't get the gradation semester
@@ -52,7 +54,7 @@ def adviseMain():
     ###################################    
     db = utils.db_connect()
     cur = db.cursor()
-    query = 'INSERT INTO student (student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (\'' + lastname + '\',\'' + firstname + '\', \'' + year + '\');'
+    query = 'INSERT INTO student (magic_id, student_last_name, student_first_name, student_email, student_year, student_graduation_semester) VALUES (magic, last, first, email, year, semester);'
     cur.execute(query)
     db.commit()
     #
