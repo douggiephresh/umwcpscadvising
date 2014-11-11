@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{%block content%}
+<h1> Upload Courses </h1>
+	<div class="form_settings">
+		<form action="/uploadCourses" method="post">
+		<p><span>Enter Course Number: </span><input type="text" name="courseNum"></p>
+		<p><span>Enter Course Name: </span><input type="text" name="courseName"></p>
+		<p><span>Enter Course Description: </span><input type="text" name="courseDescription"></p>
+   		 <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="submit" value="Upload" /></p>
+		</form>
+	</div>
+
+
+{%endblock%}
