@@ -1,0 +1,20 @@
+{% entends "layout.html" %}
+{%block content %}
+
+<h1>Students</h1>
+<form action="/students" method="post">
+<div class="form_settings">
+	<table>
+	{%for i in student%}
+	<tr>
+	<td>{{i['student_last_name']}}</td>
+	<td> {{i['student_first_name']}}</td>
+	<td>{{i['student_year']}}</td>
+	<td>{{i['student_graduation_semester']}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+</div>
+</form>
+
+{% endblock %}
