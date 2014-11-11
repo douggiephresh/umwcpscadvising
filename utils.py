@@ -1,5 +1,5 @@
 # utils.py
-import MySQLdb
+import MySQLdb, MySQLdb.cursors 
 
 DATABASE='CPSCAdvisor'
 DB_USER = 'CPSCadvising'
