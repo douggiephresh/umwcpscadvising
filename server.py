@@ -45,7 +45,7 @@ def adviseMain():
 
     magic = random.randrange(100,9000,1)
     
-    print(studentinfo)
+    print(studentinfo)    
     ### You don't get the gradation semester
     ### year needs to be an int!
     
@@ -54,7 +54,10 @@ def adviseMain():
     ###################################    
     db = utils.db_connect()
     cur = db.cursor()
-    query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(magic) + ', \'' + studentinfo['lastname'] + ', \'' + studentinfo['firstname'] + ', \'' + str(studentinfo['year']) + ', \'' + season +';'
+    query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(magic) + ', \'' + studentinfo['lastname'] + '\', \'' + studentinfo['firstname'] + '\', \'' + str(studentinfo['year']) + '\', \'' + "season"  + '\')'    +';'
+    print query
+    cur.execute(query)
+    query = 'INSERT INTO student_track (student_id, track_id) VALUES (SELECT student_id FROM student WHERE magic_id = ' + '\'' + str(magic) + '\'' + ', SELECT track_id FROM track WHERE track_name = ' + '\'' +  studentinfo['track'] + '\'' +  ');'
     print query
     cur.execute(query)
     db.commit()
