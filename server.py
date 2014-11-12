@@ -83,25 +83,10 @@ def adviseMain():
     # Offered                         #
     # look at render_tem for next step#
     ################################### 
-    
-    
-    names = [
-              {
-                 'name':{'tagline': 'helloworld'}
-              },
-      
-              {
-                 'name':{'tagline': 'holamundo'}
-              },
-      
-              {
-                 'name':{'tagline': 'herroearf'}
-              },
-           
-              {
-                 'name':{'tagline': 'bonjour world'}
-              },
-            ]
+    query = 'SELECT * FROM courses;'
+    cur.execute(query)
+    db.commit()
+    names = cur.fetchall()
     profs = [
               {
                  'name':{'tagline': 'davies'}
