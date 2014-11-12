@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 import random, utils
 
 app = Flask(__name__)
@@ -31,7 +31,7 @@ def adviseMain():
     'firstname' : request.form['firstname'],
     'lastname' : request.form['lastname'],
     'year' : request.form['year'],
-    'track' : request.form['year'],
+    'track' : request.form['track'],
     'advisor' : request.form['advisor']
     }
     season = ''
@@ -142,7 +142,43 @@ def processForms():
   
   return render_template("submit.html", keyID = rando)
 
+@app.route('/adminlogin',methods = ['get','post']) #admin login
+def adminlogin():
+  return render_template('adminlogin.html')
 
+
+@app.route('/admin-cs',methods = ['get','post']) # admin page
+def admin():
+  if request.method == 'post':
+    print request.form['identifier']
+    if request.form['identifier'] == 'CPSCadmin':
+      return render_template('admin.html')
+  return redirect('/adminlogin')
+
+@app.route('/uploadcourse',methods = ['get','post'])
+def uploadcourses():
+   return render_template('uploadcourse.html')
+
+@app.route('/uploadtrack',methods = ['get','post'])
+def uploadtracks():
+   return render_template('uploadtrack.html')
+
+@app.route('/viewstudents',methods = ['get','post'])
+def viewstudents():
+   return render_template('viewstudent.html')
+  
+@app.route('/export', methods = ['get','post']) # export template
+def export():
+  return render_template('export.html')
+
+@app.route('/students', methods = ['get','post']) # download students
+def students():
+  return send_file('hold.ods')
+
+@app.route('/classes', methods = ['get','post']) # download classes
+def classes():
+  return send_file('hold.ods')
+  
 if __name__ == '__main__':
     ###################################################
     app.debug=True # Remove this line before deliverable
