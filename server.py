@@ -54,7 +54,7 @@ def adviseMain():
     ###################################    
     db = utils.db_connect()
     cur = db.cursor()
-    query = 'INSERT INTO student (magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (\''  +  str(magic) + '\', \'' + request.form['lastname']  + '\', \'' + request.form['firstname'] + '\', \'' + str(request.form['year']) + '\', \'' + str(season) + '\'' + ';'
+    query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(magic) + ', \'' + studentinfo['lastname'] + ', \'' + studentinfo['firstname'] + ', \'' + str(studentinfo['year']) + ', \'' + season +';'
     print query
     cur.execute(query)
     db.commit()
