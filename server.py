@@ -52,12 +52,12 @@ def adviseMain():
     ###################################
     # Add above values to database    #
     ###################################    
-    #db = utils.db_connect()
-    #cur = db.cursor()
-    #query = 'INSERT INTO student (magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (\''  +  str(magic) + '\', \'' + request.form['lastname']  + '\', \'' + request.form['firstname'] + '\', \'' + str(request.form['year']) + '\', \'' + str(season) + '\'' + ';'
-    #print query
-    #ur.execute(query)
-    #db.commit()
+    db = utils.db_connect()
+    cur = db.cursor()
+    query = 'INSERT INTO student (magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES (\''  +  str(magic) + '\', \'' + request.form['lastname']  + '\', \'' + request.form['firstname'] + '\', \'' + str(request.form['year']) + '\', \'' + str(season) + '\'' + ';'
+    print query
+    cur.execute(query)
+    db.commit()
     #
     ###################################
     # Query Database For All Courses  #
@@ -149,10 +149,10 @@ def adminlogin():
 
 @app.route('/admin-cs',methods = ['get','post']) # admin page
 def admin():
-  if request.method == 'post':
-    print request.form['identifier']
-    if request.form['identifier'] == 'CPSCadmin':
-      return render_template('admin.html')
+  if request.method == 'post' or request.method =='POST':
+    print str(request.form['password'])         ########################
+    if request.form['password'] == 'CPSCadmin': #### password comparison
+      return render_template('admin.html')      ########################
   return redirect('/adminlogin')
 
 @app.route('/uploadcourse',methods = ['get','post'])
