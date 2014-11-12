@@ -63,15 +63,15 @@ def adviseMain():
     cur.execute(quick)
     studentid = cur.fetchall()
     print quick
-    print studentid
+    print studentid[0]['student_id']
 
     quick = 'SELECT track_id FROM track WHERE track_name = \'' +  studentinfo['track'] + '\';'
     print quick
     cur.execute(quick)
     trackid = cur.fetchall()
-    print trackid
+    print trackid[0]['track_id']
 
-    query = 'INSERT INTO student_track (student_id, track_id) VALUES (\'' + str(studentid[0]) + '\', \'' + str(trackid[0]) + '\');'
+    query = 'INSERT INTO student_track (student_id, track_id) VALUES (\'' + str(studentid[0]['student_id']) + '\', \'' + str(trackid[0]['track_id']) + '\');'
     print query
 
     cur.execute(query)
