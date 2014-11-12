@@ -57,7 +57,7 @@ def adviseMain():
     query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(magic) + ', \'' + studentinfo['lastname'] + '\', \'' + studentinfo['firstname'] + '\', \'' + str(studentinfo['year']) + '\', \'' + "season"  + '\')'    +';'
     print query
     cur.execute(query)
-    query = 'INSERT INTO student_track (student_id, track_id) VALUES (SELECT student_id FROM student WHERE magic_id = ' + '\'' + str(magic) + '\'' + ', SELECT track_id FROM track WHERE track_name = ' + '\'' +  studentinfo['track'] + '\'' +  ');'
+    query = 'INSERT INTO student_track (student_id, track_id) VALUES (SELECT student_id FROM student WHERE magic_id = ' + '\'' + str(magic) + '\' , ' + ' SELECT track_id FROM track WHERE track_name = ' + '\'' +  studentinfo['track'] + '\'' +  ');'
     print query
     cur.execute(query)
     db.commit()
