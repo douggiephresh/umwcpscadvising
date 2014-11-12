@@ -84,20 +84,11 @@ def adviseMain():
     cur.execute(query)
     db.commit()
     names = cur.fetchall()
-    print names
-    profs = [
-              {
-                 'name':{'tagline': 'davies'}
-              },
-      
-              {
-                 'name':{'tagline': 'anewalt'}
-              },
-      
-              {
-                 'name':{'tagline': 'polack'}
-              },
-            ]
+
+    query = 'SELECT * FROM advisor;'
+    cur.execute(query)
+    db.commit()
+    profs = cur.fetchall()
     
     # rename the 3 variables to whatever you choose
     # we will need to modify jinja in index.html to grab desired data from queried lists 
