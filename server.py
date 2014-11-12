@@ -36,14 +36,15 @@ def adviseMain():
     }
     season = ''
     if 'fall' in request.form:
-      season = {'season':'fall'}
+      season = 'fall'
     if 'spring' in request.form:
-      season = {'season':'spring'}
+      season = 'spring'
     if 'summer' in request.form:
-      season = {'season':'summer'}
-    studentinfo.update(season)
+      season = 'summer'
+    #studentinfo.update(season)
 
     magic = random.randrange(100,9000,1)
+    #might need to check queery
     
     print(studentinfo)    
     ### You don't get the gradation semester
@@ -55,24 +56,20 @@ def adviseMain():
     db = utils.db_connect()
     cur = db.cursor()
 
-    query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(magic) + ', \'' + studentinfo['lastname'] + '\', \'' + studentinfo['firstname'] + '\', \'' + str(studentinfo['year']) + '\', \'' + "season"  + '\')'    +';'
-    print query
+    query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(magic) + ', \'' + studentinfo['lastname'] + '\', \'' + studentinfo['firstname'] + '\', \'' + str(studentinfo['year']) + '\', \'' + season  + '\')'    +';'
     cur.execute(query)
 
     quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(magic) + ';'
     cur.execute(quick)
     studentid = cur.fetchall()
-    print quick
-    print studentid[0]['student_id']
 
     quick = 'SELECT track_id FROM track WHERE track_name = \'' +  studentinfo['track'] + '\';'
     print quick
     cur.execute(quick)
     trackid = cur.fetchall()
-    print trackid[0]['track_id']
+    print trackid
 
     query = 'INSERT INTO student_track (student_id, track_id) VALUES (\'' + str(studentid[0]['student_id']) + '\', \'' + str(trackid[0]['track_id']) + '\');'
-    print query
 
     cur.execute(query)
     db.commit()
@@ -83,10 +80,11 @@ def adviseMain():
     # Offered                         #
     # look at render_tem for next step#
     ################################### 
-    query = 'SELECT * FROM courses;'
+    query = 'SELECT * FROM course;'
     cur.execute(query)
     db.commit()
     names = cur.fetchall()
+    print names
     profs = [
               {
                  'name':{'tagline': 'davies'}

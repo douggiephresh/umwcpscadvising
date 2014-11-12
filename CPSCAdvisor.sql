@@ -86,4 +86,10 @@ INSERT INTO course (course_id, course_number, course_name, course_description) V
 INSERT INTO student (magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES
 (1, 'radoye', 'douglas',  2015, 'Spring');
 
-
+#tracks
+INSERT INTO track (track_id, track_name) VALUES
+(1, 'Traditional');
+INSERT INTO track (track_id, track_name) VALUES
+(2, 'CIS');
+INSERT INTO track (track_id, track_name) VALUES
+(3, 'GIS');
