@@ -149,10 +149,10 @@ def adminlogin():
 
 @app.route('/admin-cs',methods = ['get','post']) # admin page
 def admin():
-  if request.method == 'post':
-    print request.form['identifier']
-    if request.form['identifier'] == 'CPSCadmin':
-      return render_template('admin.html')
+  if request.method == 'post' or request.method =='POST':
+    print str(request.form['password'])         ########################
+    if request.form['password'] == 'CPSCadmin': #### password comparison
+      return render_template('admin.html')      ########################
   return redirect('/adminlogin')
 
 @app.route('/uploadcourse',methods = ['get','post'])
