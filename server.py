@@ -1,7 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file
 import random, utils
 
+import os, xlrd, xlwt
+from werkzeug import secure_filename
+
+                                                        ######################
+UPLOAD_FOLDER = '/home/action/workspace/adviser/files/' ### modify to rosemary
+ALLOWED_EXTENSIONS = set(['xls', 'ods'])                ######################
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
 
 # first step, moves program to login.html
 
@@ -147,13 +155,57 @@ def admin():
       return render_template('admin.html')      ########################
   return redirect('/adminlogin')
 
-@app.route('/uploadcourse',methods = ['get','post'])
-def uploadcourses():
-   return render_template('uploadcourse.html')
-
 @app.route('/uploadtrack',methods = ['get','post'])
 def uploadtracks():
-   return render_template('uploadtrack.html')
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        workbook = xlrd.open_workbook(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        worksheet = workbook.sheet_by_name('Sheet1')
+        num_rows = worksheet.nrows - 1
+        num_cells = worksheet.ncols - 1
+        curr_row = -1
+        while curr_row < num_rows:
+          curr_row += 1
+          row = worksheet.row(curr_row)
+          print 'Row:', curr_row
+          curr_cell = -1
+          while curr_cell < num_cells:
+            curr_cell += 1
+            cell_type = worksheet.cell_type(curr_row, curr_cell)
+            cell_value = worksheet.cell_value(curr_row, curr_cell)
+            print '	', cell_type, ':', cell_value ###### Values per cell in rows
+            #### 
+        return redirect('/uploadtrack')   
+    return render_template('uploadtrack.html')
+
+@app.route('/uploadnext',methods = ['get','post'])
+def uploadnext():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        workbook = xlrd.open_workbook(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        worksheet = workbook.sheet_by_name('Sheet1')
+        numrows = worksheet.nrows - 1
+        numcells = worksheet.ncols - 1
+        currentrow = -1
+        while currentrow < numrows:
+          currentrow += 1
+          row = worksheet.row(currentrow)
+          print 'Row:', currentrow
+          currentcell = -1
+          while currentcell < numcells:
+            currentcell += 1
+            celltype = worksheet.cell_type(currentrow, currentcell)
+            cellvalue = worksheet.cell_value(currentrow, currentcell)
+            print '	', celltype, ':', cellvalue ###### Values per cell in rows
+            #### 
+        return redirect('/uploadnext')   
+    return render_template('uploadnext.html')
 
 @app.route('/viewstudents',methods = ['get','post'])
 def viewstudents():
@@ -170,6 +222,9 @@ def students():
 @app.route('/classes', methods = ['get','post']) # download classes
 def classes():
   return send_file('hold.ods')
+  
+def allowed_file(filename):
+  return '.' in filename and filename.rsplit('.',1)[1] in ALLOWED_EXTENSIONS 
   
 if __name__ == '__main__':
     ###################################################
