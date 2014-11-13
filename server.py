@@ -219,11 +219,11 @@ def export():
 
 @app.route('/students', methods = ['get','post']) # download students
 def students():
-  return send_file('hold.ods')
+  return send_file('~/files/hold.ods')
 
 @app.route('/classes', methods = ['get','post']) # download classes
 def classes():
-  return send_file('hold.ods')
+  return send_file('~/files/hold.ods')
   
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.',1)[1] in ALLOWED_EXTENSIONS 
