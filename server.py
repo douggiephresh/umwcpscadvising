@@ -88,17 +88,17 @@ def adviseMain():
     # Offered                         #
     # look at render_tem for next step#
     ################################### 
-    query = 'SELECT * FROM course;'
+    query = 'SELECT course_number FROM course;'
     cur.execute(query)
     db.commit()
-    things = cur.fetchall()
-    names = things[0]
+    names = cur.fetchall()
 
-    query = 'SELECT * FROM advisor;'
+    query = 'SELECT advisor_last_name FROM advisor;'
     cur.execute(query)
     db.commit()
-    things = cur.fetchall()
-    profs = things[0]
+    profs = cur.fetchall()
+
+    print names, profs
     
     # rename the 3 variables to whatever you choose
     # we will need to modify jinja in index.html to grab desired data from queried lists 
@@ -134,7 +134,6 @@ def processForms():
   # do it here  
   #############################
   #QUERY
-  print
   
   #############################
   # KeyID generation          #
@@ -211,6 +210,11 @@ def uploadnext():
 
 @app.route('/viewstudents',methods = ['get','post'])
 def viewstudents():
+  # query = 'SELECT * FROM student;'
+  # cur.execute(query)
+  # db.commit()
+  # things = cur.fetchall()
+  # names = things[0]
    return render_template('viewstudent.html')
   
 @app.route('/export', methods = ['get','post']) # export template

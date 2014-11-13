@@ -5,7 +5,7 @@
 <!-- create the checkbutton lists -->
 <h1> Courses </h1>
   <br>
-<form name = 'course_name' action = '/process' method = "Post">
+<form name = 'courses' action = '/process' method = "Post">
 <div class="form_settings">
   
             <p> Select Completed Courses: </p>
@@ -14,19 +14,19 @@
    <table>
   {% for i in class_name %}
    <tr>
-     <td>{{i.name.tagline}}</td>
-     <td><input type="checkbox" name="checkcomplete" value ={{i.name.tagline}} ></td>
+     <td>{{i.course_number.tagline}}</td>
+     <td><input type="checkbox" name="checkcomplete" value ={{i.course_number.tagline}} ></td>
    </tr> 
   {% endfor %}
   </table>
   
  <p><span>Select Courses For Upcoming Semester: </span></p>
   <table>
-  {% for i in class_name2 %}
+  {% for i in course_number %}
    <tr>
-     <td>{{i.name.tagline}}</td>
-     <td><input type="checkbox" name="checkneed" value ={{i.name.tagline}} ></td>
-     <td><input type="checkbox" name="checkwant" value ={{i.name.tagline}} ></td>
+     <td>{{i.course_number.tagline}}</td>
+     <td><input type="checkbox" name="checkneed" value ={{i.course_number.tagline}} ></td>
+     <td><input type="checkbox" name="checkwant" value ={{i.course_number.tagline}} ></td>
     </tr> 
   {% endfor %}
   </table>
