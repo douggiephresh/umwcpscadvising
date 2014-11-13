@@ -14,19 +14,19 @@
    <table>
   {% for i in class_name %}
    <tr>
-     <td>{{i.course_number.tagline}}</td>
-     <td><input type="checkbox" name="checkcomplete" value ={{i.course_number.tagline}} ></td>
+     <td>{{i.course_number}}</td>
+     <td><input type="checkbox" name="checkcomplete" value ={{i.course_number}} ></td>
    </tr> 
   {% endfor %}
   </table>
   
  <p><span>Select Courses For Upcoming Semester: </span></p>
   <table>
-  {% for i in course_number %}
+  {% for i in class_name %}
    <tr>
-     <td>{{i.course_number.tagline}}</td>
-     <td><input type="checkbox" name="checkneed" value ={{i.course_number.tagline}} ></td>
-     <td><input type="checkbox" name="checkwant" value ={{i.course_number.tagline}} ></td>
+     <td>{{i.course_number}}</td>
+     <td><input type="checkbox" name="checkneed" value ={{i.course_number}} ></td>
+     <td><input type="checkbox" name="checkwant" value ={{i.course_number}} ></td>
     </tr> 
   {% endfor %}
   </table>
