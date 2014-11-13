@@ -91,12 +91,14 @@ def adviseMain():
     query = 'SELECT * FROM course;'
     cur.execute(query)
     db.commit()
-    names = cur.fetchall()
+    things = cur.fetchall()
+    names = things[0]
 
     query = 'SELECT * FROM advisor;'
     cur.execute(query)
     db.commit()
-    profs = cur.fetchall()
+    things = cur.fetchall()
+    profs = things[0]
     
     # rename the 3 variables to whatever you choose
     # we will need to modify jinja in index.html to grab desired data from queried lists 
@@ -132,7 +134,7 @@ def processForms():
   # do it here  
   #############################
   #QUERY
-  
+  print
   
   #############################
   # KeyID generation          #
