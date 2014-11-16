@@ -70,7 +70,23 @@ CREATE TABLE IF NOT EXISTS track_course (
 );
 
 
-CREATE TABLE IF NOT EXISTS student_course (
+CREATE TABLE IF NOT EXISTS student_taken (
+	student_id INT NOT NULL,
+	course_id INT NOT NULL,
+	FOREIGN KEY(student_id ) REFERENCES student(student_id),
+	FOREIGN KEY(course_id) REFERENCES course(course_id)
+);
+
+
+CREATE TABLE IF NOT EXISTS student_wanted (
+	student_id INT NOT NULL,
+	course_id INT NOT NULL,
+	FOREIGN KEY(student_id ) REFERENCES student(student_id),
+	FOREIGN KEY(course_id) REFERENCES course(course_id)
+);
+
+
+CREATE TABLE IF NOT EXISTS student_needed (
 	student_id INT NOT NULL,
 	course_id INT NOT NULL,
 	FOREIGN KEY(student_id ) REFERENCES student(student_id),
