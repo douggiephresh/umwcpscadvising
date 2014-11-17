@@ -29,6 +29,12 @@ def login():
   
 @app.route('/keylogin', methods = ['GET', 'POST'])
 def keylogin():
+  session['magic'] = request.form['identifier']
+  quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(session['magic']) + ';'
+  cur.execute(quick)
+  student = cur.fetchall()
+  session['studentid'] = str(student[0]['student_id'])
+  print session
   return render_template("keylogin.html")
 
 # third step, takes information from first login and stores it into database. 
@@ -180,8 +186,12 @@ def processForms():
     cur.execute(query)
     db.commit()
   print '\n#############################################################'
+
+  tempmagic = session['magic']
+  session.pop('magic')
+  session.pop('studentid')
   
-  return render_template("submit.html", keyID = session['magic'])
+  return render_template("submit.html", keyID = tempmagic)
 
 @app.route('/adminlogin',methods = ['get','post']) #admin login
 def adminlogin():
