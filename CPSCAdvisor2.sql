@@ -94,7 +94,17 @@ CREATE TABLE IF NOT EXISTS student_needed (
 );
 
 INSERT INTO advisor (advisor_id, advisor_user_name, advisor_last_name, advisor_first_name, advisor_password) VALUES
-(1, 'ifinlayson', 'finlayson', 'ian', 'bananas');
+(1, 'anewalt', 'Anewalt', 'Karen', 'bananas');
+INSERT INTO advisor (advisor_id, advisor_user_name, advisor_last_name, advisor_first_name, advisor_password) VALUES
+(2, 'stephen', 'Davies', 'Stephen', 'bananas');
+INSERT INTO advisor (advisor_id, advisor_user_name, advisor_last_name, advisor_first_name, advisor_password) VALUES
+(3, 'finlayson', 'Finlayson', 'Ian', 'bananas');
+INSERT INTO advisor (advisor_id, advisor_user_name, advisor_last_name, advisor_first_name, advisor_password) VALUES
+(4, 'polack', 'Polack', 'Jennifer', 'bananas');
+INSERT INTO advisor (advisor_id, advisor_user_name, advisor_last_name, advisor_first_name, advisor_password) VALUES
+(5, 'marshall', 'Marshall', 'Andrew', 'bananas');
+INSERT INTO advisor (advisor_id, advisor_user_name, advisor_last_name, advisor_first_name, advisor_password) VALUES
+(6, 'raz', 'Zacharski', 'Ron', 'bananas');
 
 INSERT INTO course (course_id, course_number, course_name, course_description) VALUES
 (1, 'cpsc430', 'Software Design', 'We play games to learn about team problem solving.');
