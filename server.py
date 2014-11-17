@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for, send_file, session
 import random, utils
 
 import os, xlrd, xlwt
@@ -10,6 +10,8 @@ ALLOWED_EXTENSIONS = set(['xls', 'ods'])                ######################
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
+
+app.secret_key = 'Zq4oA4Dqq3'
 
 # first step, moves program to login.html
 
@@ -51,7 +53,11 @@ def adviseMain():
       season = 'summer'
     #studentinfo.update(season)
 
-    magic = random.randrange(100,9000,1)
+    rando = random.randrange(100,9000,1)
+    session['magic'] = rando
+    print '\n#############################################################'
+    print str(session['magic'])
+    print '\n#############################################################'
     #might need to check queery
     
     print(studentinfo)    
@@ -64,12 +70,15 @@ def adviseMain():
     db = utils.db_connect()
     cur = db.cursor()
 
-    query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(magic) + ', \'' + studentinfo['lastname'] + '\', \'' + studentinfo['firstname'] + '\', \'' + str(studentinfo['year']) + '\', \'' + season  + '\')'    +';'
+    query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(session['magic']) + ', \'' + studentinfo['lastname'] + '\', \'' + studentinfo['firstname'] + '\', \'' + str(studentinfo['year']) + '\', \'' + season  + '\')'    +';'
     cur.execute(query)
 
-    quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(magic) + ';'
+    #student now selected globally
+    quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(session['magic']) + ';'
     cur.execute(quick)
-    studentid = cur.fetchall()
+    student = cur.fetchall()
+    session['studentid'] = str(student[0]['student_id'])
+    print session
 
     quick = 'SELECT track_id FROM track WHERE track_name = \'' +  studentinfo['track'] + '\';'
     print quick
@@ -77,7 +86,7 @@ def adviseMain():
     trackid = cur.fetchall()
     print trackid
 
-    query = 'INSERT INTO student_track (student_id, track_id) VALUES (\'' + str(studentid[0]['student_id']) + '\', \'' + str(trackid[0]['track_id']) + '\');'
+    query = 'INSERT INTO student_track (student_id, track_id) VALUES (\'' + str(student[0]['student_id']) + '\', \'' + str(trackid[0]['track_id']) + '\');'
 
     cur.execute(query)
     db.commit()
@@ -114,11 +123,13 @@ def processForms():
   checkneed = request.values.getlist('checkneed') # the getlist returns a list of all checked box values
   checkwant = request.values.getlist('checkwant') # you may need to break down to each individual values
   
+  db = utils.db_connect()
+  cur = db.cursor()
+  
   ##############################
   # We may need to format the  #
   # lists above                #
   ##############################
-  
   
   # debugging
   for i in checkcomplete:
@@ -134,14 +145,43 @@ def processForms():
   # do it here  
   #############################
   #QUERY
+  print '\n#############################################################'
+  for first in checkcomplete:
+    print first
+    subquery = 'SELECT course_id FROM course WHERE course_number = \'' + str(first) + '\';'
+    cur.execute(subquery)
+    db.commit()
+    subfirst = cur.fetchall()
+    print str(subfirst)
+    query = 'INSERT INTO student_taken (student_id, course_id) VALUES(\'' + str(session['studentid']) + '\', \'' + str(subfirst[0]['course_id']) + '\');' 
+    print query
+    cur.execute(query)
+    db.commit()
+  for second in checkneed:
+    print second
+    subquery = 'SELECT course_id FROM course WHERE course_number = \'' + str(first) + '\';'
+    cur.execute(subquery)
+    db.commit()
+    subsecond = cur.fetchall()
+    print str(subsecond)
+    query = 'INSERT INTO student_wanted (student_id, course_id) VALUES(\'' + str(session['studentid']) + '\', \'' + str(subsecond[0]['course_id']) + '\');' 
+    print query
+    cur.execute(query)
+    db.commit()
+  for third in checkwant:
+    print third
+    subquery = 'SELECT course_id FROM course WHERE course_number = \'' + str(first) + '\';'
+    cur.execute(subquery)
+    db.commit()
+    subthird = cur.fetchall()
+    print str(subthird)
+    print query
+    query = 'INSERT INTO student_needed (student_id, course_id) VALUES(\'' + str(session['studentid']) + '\', \'' + str(subthird[0]['course_id']) + '\');'
+    cur.execute(query)
+    db.commit()
+  print '\n#############################################################'
   
-  #############################
-  # KeyID generation          #
-  # Query Student first, last #
-  #############################
-  rando = random.randrange(100,9000,1)
-  
-  return render_template("submit.html", keyID = rando)
+  return render_template("submit.html", keyID = session['magic'])
 
 @app.route('/adminlogin',methods = ['get','post']) #admin login
 def adminlogin():
@@ -223,11 +263,11 @@ def export():
 
 @app.route('/students', methods = ['get','post']) # download students
 def students():
-  return send_file('~/files/hold.ods')
+  return send_file('~/files/students.xls')
 
 @app.route('/classes', methods = ['get','post']) # download classes
 def classes():
-  return send_file('~/files/hold.ods')
+  return send_file('~/files/classes.xls')
   
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.',1)[1] in ALLOWED_EXTENSIONS 
