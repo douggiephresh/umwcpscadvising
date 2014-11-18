@@ -47,7 +47,11 @@ def keylogin():
   # cur.execute(query)
   # db.commit()
   # profs = cur.fetchall()
-
+  #######
+  # Change the render template to the key login html
+  # Right now the key login button directs to '/login'
+  # may need to make a new one to process the input
+  ######
   return render_template('index.html')#, class_name = names, class_name2= names, professors = profs)
 
 
