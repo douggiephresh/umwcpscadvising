@@ -24,7 +24,10 @@ def index():
 @app.route("/login", methods = ["GET", "POST"])
 def login():
     return render_template("index.html")
-
+  
+@app.route('/keylogin2', methods = ['GET', 'POST'])
+def keylogin2():
+  return render_template('keylogin.html')
 # second step two, allows login using key id  
   
 @app.route('/keylogin', methods = ['GET', 'POST'])
@@ -107,39 +110,14 @@ def keylogin():
 
   print names, profs
   
+  
+
+  
   # # rename the 3 variables to whatever you choose
   # # we will need to modify jinja in index.html to grab desired data from queried lists 
   return render_template('index.html', class_name = names, class_name2= names, professors = profs)
 
-  # print '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-  # session['magic'] = request.form['identifier']
-  # quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(session['magic']) + ';'
-  # cur.execute(quick)
-  # student = cur.fetchall()
-  # session['studentid'] = str(student[0]['student_id'])
-  # print session
-  # return render_template("keylogin.html")
-  # print '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-  # query = 'SELECT course_number FROM course;'
-  # cur.execute(query)
-  # db.commit()
-  # names = cur.fetchall()
 
-  # query = 'SELECT advisor_last_name FROM advisor;'
-  # cur.execute(query)
-  # db.commit()
-  # profs = cur.fetchall()
-<<<<<<< HEAD
-
-  #return render_template('index.html')#, class_name = names, class_name2= names, professors = profs)
-=======
-  #######
-  # Change the render template to the key login html
-  # Right now the key login button directs to '/login'
-  # may need to make a new one to process the input
-  ######
-  return render_template('index.html')#, class_name = names, class_name2= names, professors = profs)
->>>>>>> 679a131cfd4737d17a8dad1a3ddd9f1a3abf477a
 
 
 # third step, takes information from first login and stores it into database. 
@@ -398,3 +376,4 @@ if __name__ == '__main__':
     app.debug=True # Remove this line before deliverable
     ####################################################
     app.run(host='0.0.0.0', port=55000)
+re
