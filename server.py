@@ -29,13 +29,27 @@ def login():
   
 @app.route('/keylogin', methods = ['GET', 'POST'])
 def keylogin():
-  session['magic'] = request.form['identifier']
-  quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(session['magic']) + ';'
-  cur.execute(quick)
-  student = cur.fetchall()
-  session['studentid'] = str(student[0]['student_id'])
-  print session
-  return render_template("keylogin.html")
+  # print '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+  # session['magic'] = request.form['identifier']
+  # quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(session['magic']) + ';'
+  # cur.execute(quick)
+  # student = cur.fetchall()
+  # session['studentid'] = str(student[0]['student_id'])
+  # print session
+  # return render_template("keylogin.html")
+  # print '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+  # query = 'SELECT course_number FROM course;'
+  # cur.execute(query)
+  # db.commit()
+  # names = cur.fetchall()
+
+  # query = 'SELECT advisor_last_name FROM advisor;'
+  # cur.execute(query)
+  # db.commit()
+  # profs = cur.fetchall()
+
+  return render_template('index.html')#, class_name = names, class_name2= names, professors = profs)
+
 
 # third step, takes information from first login and stores it into database. 
 # renders dynamic tables for user interaction
@@ -58,24 +72,30 @@ def adviseMain():
     if 'summer' in request.form:
       season = 'summer'
     #studentinfo.update(season)
+    db = utils.db_connect()
+    cur = db.cursor()
 
-    rando = random.randrange(100,9000,1)
-    session['magic'] = rando
-    print '\n#############################################################'
-    print str(session['magic'])
-    print '\n#############################################################'
+    exists = True
+    while exists == True:
+      rando = random.randrange(100,9000,1)
+      print rando
+      quick = 'SELECT student_id FROM student WHERE magic_id = ' + str(rando) + ';'
+      cur.execute(quick)
+      student = cur.fetchall()
+      print student
+      if not student:
+        exists = False
+
     #might need to check queery
     
     print(studentinfo)    
     ### You don't get the gradation semester
     ### year needs to be an int!
+    session['magic'] = rando
     
     ###################################
     # Add above values to database    #
     ###################################    
-    db = utils.db_connect()
-    cur = db.cursor()
-
     query = 'INSERT INTO student(magic_id, student_last_name, student_first_name, student_year, student_graduation_semester) VALUES(' + str(session['magic']) + ', \'' + studentinfo['lastname'] + '\', \'' + studentinfo['firstname'] + '\', \'' + str(studentinfo['year']) + '\', \'' + season  + '\')'    +';'
     cur.execute(query)
 
