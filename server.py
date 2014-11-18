@@ -5,7 +5,7 @@ import os, xlrd, xlwt
 from werkzeug import secure_filename
 
                                                         ######################
-UPLOAD_FOLDER = '/home/action/workspace/adviser/files/' ### modify to rosemary
+UPLOAD_FOLDER = '/files/' ### modify to rosemary
 ALLOWED_EXTENSIONS = set(['xls', 'ods'])                ######################
 
 app = Flask(__name__)
@@ -29,97 +29,6 @@ def login():
 def keylogin2():
   return render_template('keylogin.html')
 # second step two, allows login using key id  
-  
-@app.route('/keylogin', methods = ['GET', 'POST'])
-def keylogin():
-  # first form input values
-  session['magic'] = request.form['identifier']
-  print session['magic']
-  # studentinfo = {
-  # 'firstname' : request.form['firstname'],
-  # 'lastname' : request.form['lastname'],
-  # 'year' : request.form['year'],
-  # 'track' : request.form['track'],
-  # 'advisor' : request.form['advisor']
-  # }
-  # season = ''
-  # if 'fall' in request.form:
-  #   season = 'fall'
-  # if 'spring' in request.form:
-  #   season = 'spring'
-  # if 'summer' in request.form:
-  #   season = 'summer'
-  # #studentinfo.update(season)
-  db = utils.db_connect()
-  cur = db.cursor()
-
-  # exists = True
-  # while exists == True:
-  #   rando = random.randrange(100,9000,1)
-  #   print rando
-  #   quick = 'SELECT student_id FROM student WHERE magic_id = ' + str(rando) + ';'
-  #   cur.execute(quick)
-  #   student = cur.fetchall()
-  #   print student
-  #   if not student:
-  #     exists = False
-
-  # #might need to check queery
-  
-  # print(studentinfo)    
-  # ### You don't get the gradation semester
-  # ### year needs to be an int!
-  # session['magic'] = rando
-  
-  # ###################################
-  # # Add above values to database    #
-  # ###################################
-  # #student now selected globally
-  # quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(session['magic']) + ';'
-  # cur.execute(quick)
-  # student = cur.fetchall()
-  # session['studentid'] = str(student[0]['student_id'])
-  # print session
-
-  # quick = 'SELECT track_id FROM track WHERE track_name = \'' +  studentinfo['track'] + '\';'
-  # print quick
-  # cur.execute(quick)
-  # trackid = cur.fetchall()
-  # print trackid
-
-  # query = 'INSERT INTO student_track (student_id, track_id) VALUES (\'' + str(student[0]['student_id']) + '\', \'' + str(trackid[0]['track_id']) + '\');'
-
-  # cur.execute(query)
-  # db.commit()
-  # #
-  # ###################################
-  # # Query Database For All Courses  #
-  # # Query Database For All Courses  #
-  # # Offered                         #
-  # # look at render_tem for next step#
-  # ################################### 
-  query = 'SELECT course_number FROM course;'
-  cur.execute(query)
-  db.commit()
-  names = cur.fetchall()
-
-  query = 'SELECT advisor_last_name FROM advisor;'
-  cur.execute(query)
-  db.commit()
-  profs = cur.fetchall()
-
-  print names, profs
-  
-  
-
-  
-  # # rename the 3 variables to whatever you choose
-  # # we will need to modify jinja in index.html to grab desired data from queried lists 
-  return render_template('index.html', class_name = names, class_name2= names, professors = profs)
-
-
-
-
 # third step, takes information from first login and stores it into database. 
 # renders dynamic tables for user interaction
 
@@ -211,6 +120,44 @@ def adviseMain():
 
 # fourth step, processes course checkboxes, creates keyID, redirects to final page with key id
   
+@app.route('/advise2', methods = ['GET','POST'])
+def adviseMain2():
+    # first form input values
+    session['magic'] = request.form['identifier']
+    #studentinfo.update(season)
+    db = utils.db_connect()
+    cur = db.cursor()
+    print '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+    query = 'SELECT * FROM student WHERE magic_id =' + str(session['magic'])
+    cur.execute(query)
+    db.commit()
+    person = cur.fetchall()
+    print person
+    print '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+    quick = 'SELECT student_id FROM student WHERE magic_id = '  + str(session['magic']) + ';'
+    cur.execute(quick)
+    student = cur.fetchall()
+    print str(student) + '$$$$$'
+    session['studentid'] = str(student[0]['student_id'])
+    print session['studentid']
+
+    query = 'SELECT course_number FROM course;'
+    #query = 'SELECT course_number FROM course WHERE course_id IN SELECT course_id FROM track_course WHERE trackid =' +  + ';'
+    cur.execute(query)
+    db.commit()
+    names = cur.fetchall()
+
+    query = 'SELECT advisor_last_name FROM advisor;'
+    cur.execute(query)
+    db.commit()
+    profs = cur.fetchall()
+
+    print names, profs
+    
+    # rename the 3 variables to whatever you choose
+    # we will need to modify jinja in index.html to grab desired data from queried lists 
+    return render_template('index.html', class_name = names, class_name2= names, professors = profs)
+
 @app.route("/process", methods = ["POST","GET"] )
 def processForms():
   # Three variables are lists of all checkboxes checked
