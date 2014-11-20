@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{%block content %}
+
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1>Welcome Admin</h1>
+        
+       <form action="/uploadcourse" method="get">
+         <div class="form_settings">
+            <p style="padding-top: 15px"><input class="submit" type="submit" name="uploadC" value="Upload Courses" /></p>
+         </div>
+        </form>
+       <form action="/uploadtrack" method="get">
+         <div class="form_settings">
+            <p style="padding-top: 15px"><input class="submit" type="submit" name="uploadT" value="Upload Track" /></p>
+         </div>
+        </form>
+       <form action="/viewstudents" method="get">
+            <div class="form_settings">
+            <p style="padding-top: 15px"><input class="submit" type="submit" name="view" value="View Students" /></p>
+        </div>
+      </form>
+         <form action="/export" method="get">
+            <div class="form_settings">
+            <p style="padding-top: 15px"><input class="submit" type="submit" name="view" value="Export" /></p>
+        </div>
+      </form>
+    </div>
+{% endblock %}
