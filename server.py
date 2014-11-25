@@ -309,6 +309,21 @@ def export():
 
 @app.route('/students', methods = ['get','post']) # download students
 def students():
+    ###most of this is just templated until we know exactly what data we want to print to the spreadsheets
+    ###To keep the unfinished code from breaking everything, it is being left commented out for now
+    db = utils.db_connect()
+    cur = db.cursor()
+    #query = Whatever data we need to print to the excel document
+    #cur.execute(query)
+    #studentData = cur.fetchall()
+
+    ###for number of students or courses...
+    #exportStudents = xlwt.Workbook()
+    #worksheet = exportStudents.add_sheet('students')
+    ### format for write: worksheet.write(row, column, 'text')
+    ### for example: worksheet.write(4, 3, 'hello world')
+
+    exportStudentsself.save('students.xls')
   return send_file('~/files/students.xls')
 
 @app.route('/classes', methods = ['get','post']) # download classes
@@ -323,4 +338,4 @@ if __name__ == '__main__':
     app.debug=True # Remove this line before deliverable
     ####################################################
     app.run(host='0.0.0.0', port=55000)
-re
+ 
