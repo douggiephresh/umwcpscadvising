@@ -3,27 +3,13 @@
 
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Welcome Admin</h1>
+        <h1>Admin Login</h1>
         
-       <form action="/uploadcourse" method="get">
-         <div class="form_settings">
-            <p style="padding-top: 15px"><input class="submit" type="submit" name="uploadC" value="Upload Courses" /></p>
-         </div>
-        </form>
-       <form action="/uploadtrack" method="get">
-         <div class="form_settings">
-            <p style="padding-top: 15px"><input class="submit" type="submit" name="uploadT" value="Upload Track" /></p>
-         </div>
-        </form>
-       <form action="/viewstudents" method="get">
-            <div class="form_settings">
-            <p style="padding-top: 15px"><input class="submit" type="submit" name="view" value="View Students" /></p>
-        </div>
-      </form>
-         <form action="/export" method="get">
-            <div class="form_settings">
-            <p style="padding-top: 15px"><input class="submit" type="submit" name="view" value="Export" /></p>
-        </div>
-      </form>
+       
+      <form action="/adminlogin" method="post">
+    <p><span>Admin Username: </span><input type="text" name="adminname"></p>
+    <p><span>Password: </span><input type="password" name="adminpass"></p>
+    <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="submit" value="Enter" />     </p>
+  </form>
     </div>
 {% endblock %}

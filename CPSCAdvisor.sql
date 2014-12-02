@@ -38,7 +38,7 @@ CREATE TABLE `advisor` (
 
 LOCK TABLES `advisor` WRITE;
 /*!40000 ALTER TABLE `advisor` DISABLE KEYS */;
-INSERT INTO `advisor` VALUES (1,'anewalt','Anewalt','Karen','bananas'),(2,'stephen','Davies','Stephen','bananas'),(3,'finlayson','Finlayson','Ian','bananas'),(4,'polack','Polack','Jennifer','bananas'),(5,'marshall','Marshall','Andrew','bananas'),(6,'raz','Zacharski','Ron','bananas');
+INSERT INTO `advisor` VALUES (1,'anewalt','Anewalt','Karen','bananas'),(2,'stephen','Davies','Stephen','bananas'),(3,'finlayson','Finlayson','Ian','bananas'),(4,'polack','Polack','Jennifer','bananas'),(5,'marshall','Marshall','Andrew','bananas'),(6,'raz','Zacharski','Ron','bananas'),(7,'admin01','Admin','Admin',SHA2('CpscIsNumber1');
 /*!40000 ALTER TABLE `advisor` ENABLE KEYS */;
 UNLOCK TABLES;
 

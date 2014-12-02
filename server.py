@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, session
 import random, utils
+import hashlib
 
 import os, xlrd, xlwt
 from werkzeug import secure_filename
@@ -234,6 +235,19 @@ def processForms():
 def adminlogin():
   return render_template('adminlogin.html')
 
+@app.route('/adminprocess',methods = ['get','post']) #admin processing
+def adminprocess():
+  
+  query = "select advisor_user_name from advisor WHERE advisor_password = SHA2('%s', 0)" % (request.form['adminpass'])
+  cur.execute(query)
+  db.commit()
+  admin = cur.fetchall()
+  name = str(admin[0]['advisor_user_name'])
+  if name == request.form['adminname']:
+    return render_template('adminwelcome.html')
+  else:
+    return render_template('adminlogin.html')
+
 
 @app.route('/admin-cs',methods = ['get','post']) # admin page
 def admin():
@@ -241,7 +255,7 @@ def admin():
     print str(request.form['password'])         ########################
     if request.form['password'] == 'CPSCadmin': #### password comparison
       return render_template('admin.html')      ########################
-  return redirect('/adminlogin')
+  return redirect('/admin-cs')
 
 @app.route('/uploadtrack',methods = ['get','post'])
 def uploadtracks():
@@ -325,7 +339,7 @@ def students():
     ### for example: worksheet.write(4, 3, 'hello world')
 
     exportStudentsself.save('students.xls')
-  return send_file('~/files/students.xls')
+    return send_file('~/files/students.xls')
 
 @app.route('/classes', methods = ['get','post']) # download classes
 def classes():
