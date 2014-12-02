@@ -27,7 +27,7 @@ CREATE TABLE `advisor` (
   `advisor_user_name` varchar(25) NOT NULL,
   `advisor_last_name` varchar(25) NOT NULL,
   `advisor_first_name` varchar(25) NOT NULL,
-  `advisor_password` varchar(25) NOT NULL,
+  `advisor_password` INT NOT NULL,
   PRIMARY KEY (`advisor_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +38,7 @@ CREATE TABLE `advisor` (
 
 LOCK TABLES `advisor` WRITE;
 /*!40000 ALTER TABLE `advisor` DISABLE KEYS */;
-INSERT INTO `advisor` VALUES (1,'anewalt','Anewalt','Karen','bananas'),(2,'stephen','Davies','Stephen','bananas'),(3,'finlayson','Finlayson','Ian','bananas'),(4,'polack','Polack','Jennifer','bananas'),(5,'marshall','Marshall','Andrew','bananas'),(6,'raz','Zacharski','Ron','bananas'),(7,'admin01','Admin','Admin',SHA2('CpscIsNumber1');
+INSERT INTO `advisor` VALUES (1,'anewalt','Anewalt','Karen',SHA2('CpscIsNumber1', 224)),(2,'stephen','Davies','Stephen',SHA2('CpscIsNumber1', 224)),(3,'finlayson','Finlayson','Ian',SHA2('CpscIsNumber1', 224)),(4,'polack','Polack','Jennifer',SHA2('CpscIsNumber1', 224)),(5,'marshall','Marshall','Andrew',SHA2('CpscIsNumber1', 224)),(6,'raz','Zacharski','Ron',SHA2('CpscIsNumber1', 224)),(7,'admin01','Admin','Admin',SHA2('CpscIsNumber1', 224);
 /*!40000 ALTER TABLE `advisor` ENABLE KEYS */;
 UNLOCK TABLES;
 

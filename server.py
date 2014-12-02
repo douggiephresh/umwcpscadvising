@@ -238,7 +238,7 @@ def adminlogin():
 @app.route('/adminprocess',methods = ['get','post']) #admin processing
 def adminprocess():
   
-  query = "select advisor_user_name from advisor WHERE advisor_password = SHA2('%s', 0)" % (request.form['adminpass'])
+  query = "select advisor_user_name from advisor WHERE advisor_password = SHA2('%s', 224)" % (request.form['adminpass'])
   cur.execute(query)
   db.commit()
   admin = cur.fetchall()
