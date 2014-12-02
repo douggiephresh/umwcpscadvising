@@ -346,7 +346,7 @@ def students():
           worksheet.write(rowCount, column, row[column])
         else:
           break
-      rowCount++
+      rowCount = rowCount + 1
 
     exportStudentsself.save('students.xls')
     return send_file('~/files/students.xls')
