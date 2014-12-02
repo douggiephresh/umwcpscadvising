@@ -331,10 +331,22 @@ def students():
     studentData = cur.fetchall()
 
     ###for number of students or courses...
-    #exportStudents = xlwt.Workbook()
-    #worksheet = exportStudents.add_sheet('students')
+    exportStudents = xlwt.Workbook()
+    worksheet = exportStudents.add_sheet('students')
     ### format for write: worksheet.write(row, column, 'text')
     ### for example: worksheet.write(4, 3, 'hello world')
+    worksheet.write(1, 1, 'Course Number')
+    worksheet.write(2, 1, 'Course Name')
+    worksheet.write(3, 1, 'Students')
+    rowCount = 2
+    for row in studentData:
+      for column in 1000:
+        #continue until there are no more students
+        if row[column] != NULL:
+          worksheet.write(rowCount, column, row[column])
+        else:
+          break
+      rowCount++
 
     exportStudentsself.save('students.xls')
     return send_file('~/files/students.xls')
