@@ -324,13 +324,11 @@ def export():
 
 @app.route('/students', methods = ['get','post']) # download students
 def students():
-    ###most of this is just templated until we know exactly what data we want to print to the spreadsheets
-    ###To keep the unfinished code from breaking everything, it is being left commented out for now
     db = utils.db_connect()
     cur = db.cursor()
-    #query = Whatever data we need to print to the excel document
-    #cur.execute(query)
-    #studentData = cur.fetchall()
+    query = 'SELECT course.course_number, course.course_name, student.student_last_name, student.student_first_name FROM course JOIN student ON student_course.course_id = course.course_id AND student_course.student_id = student_id;'
+    cur.execute(query)
+    studentData = cur.fetchall()
 
     ###for number of students or courses...
     #exportStudents = xlwt.Workbook()
