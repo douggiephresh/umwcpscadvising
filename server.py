@@ -146,6 +146,7 @@ def adviseMain2():
     cur.execute(query)
     db.commit()
     names = cur.fetchall()
+    print names
 
     query = 'SELECT advisor_last_name FROM advisor;'
     cur.execute(query)
