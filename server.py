@@ -237,11 +237,16 @@ def adminlogin():
 
 @app.route('/adminprocess',methods = ['get','post']) #admin processing
 def adminprocess():
-  
-  query = "select advisor_user_name from advisor WHERE advisor_password = SHA2('%s', 224)" % (request.form['adminpass'])
+  db = utils.db_connect()
+  cur = db.cursor()
+  query = "select advisor_user_name from advisor WHERE advisor_password = SHA2('%s', 0);" % (request.form['adminpass'])
+  print request.form['adminname']
+  print query
   cur.execute(query)
   db.commit()
   admin = cur.fetchall()
+  if len(admin) == 0:
+    return render_template('adminlogin.html')
   name = str(admin[0]['advisor_user_name'])
   if name == request.form['adminname']:
     return render_template('adminwelcome.html')
