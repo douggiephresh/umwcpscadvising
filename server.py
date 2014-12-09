@@ -331,7 +331,7 @@ def export():
 def students():
     db = utils.db_connect()
     cur = db.cursor()
-    query = 'SELECT course.course_number, course.course_name, student.student_last_name, student.student_first_name FROM course JOIN student ON student_course.course_id = course.course_id AND student_course.student_id = student_id;'
+    query = 'SELECT course.course_number, course.course_name, student.student_last_name, student.student_first_name FROM course JOIN student ON student_course.course_id = course.course_id AND student_course.student_id = student.student_id;'
     cur.execute(query)
     studentData = cur.fetchall()
 
