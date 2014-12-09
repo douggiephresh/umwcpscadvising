@@ -325,7 +325,32 @@ def viewstudents():
   
 @app.route('/export', methods = ['get','post']) # export template
 def export():
-  return render_template('export.html')
+    db = utils.db_connect()
+    cur = db.cursor()
+    query = 'SELECT course.course_number, course.course_name, student.student_last_name, student.student_first_name FROM course JOIN student ON student_course.course_id = course.course_id AND student_course.student_id = student.student_id;'
+    cur.execute(query)
+    studentData = cur.fetchall()
+
+    ###for number of students or courses...
+    exportStudents = xlwt.Workbook()
+    worksheet = exportStudents.add_sheet('classes')
+    ### format for write: worksheet.write(row, column, 'text')
+    ### for example: worksheet.write(4, 3, 'hello world')
+    worksheet.write(1, 1, 'Course Number')
+    worksheet.write(2, 1, 'Course Name')
+    worksheet.write(3, 1, 'Students')
+    rowCount = 2
+    for row in studentData:
+      for column in 1000:
+        #continue until there are no more students
+        if row[column] != NULL:
+          worksheet.write(rowCount, column, row[column])
+        else:
+          break
+      rowCount = rowCount + 1
+
+    exportStudentsself.save('classes.xls')
+    return send_file('~/files/classes.xls')
 
 @app.route('/students', methods = ['get','post']) # download students
 def students():
@@ -383,7 +408,7 @@ def classes():
       rowCount = rowCount + 1
 
     exportStudentsself.save('classes.xls')
-  return send_file('~/files/classes.xls')
+    return send_file('~/files/classes.xls')
   
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.',1)[1] in ALLOWED_EXTENSIONS 
